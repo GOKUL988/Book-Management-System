@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+{% block content%}
+<style>
+</style>
+<form method="GET">
+    <table align="right">
+        <tr>
+            <th><input id="inp" type="text" name="search1" placeholder="Search by title or ISBN"></th>
+            <th> <button type="submit" onclick="cl()">Search</button></th>
+        </tr>
+    </table>
+</form>
+
+<table align="center" cellpadding="10px" width="90%">
+    <tr>
+        <th>BOOK NAME</th>
+        <th>ISBN NO</th>
+        <th>AUTHOR NAME</th>
+        <th>EDITION</th>
+        <th>YEAR</th>
+        <th>CLASSFICATON</th>
+    </tr>
+    {% for inf in book_inf%}
+    <tr>
+        <th>{{inf.booktitle}}</th>
+        <th>{{inf.isbn}}</th>
+        <th>{{inf.authorname}}</th>
+        <th>{{inf.edition}}</th>
+        <th>{{inf.yearofpub}}</th>
+        <th>{{inf.classfic}}</th>
+        <td><a href="http://127.0.0.1:8000/bookdt/{{inf.acceno}}"><button>View</button></a></td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock%}

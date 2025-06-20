@@ -1,0 +1,19 @@
+body{
+    background-color:grey;
+    color:white;
+}
+.pagesep{
+    display:flex;
+}
+.pagesep1{
+    flex:50%;
+}
+.pagesep2{
+    flex:50%;
+}
+.fo{
+    font-size:large;
+}
+td{
+     text-align:center;
+}

@@ -1,0 +1,68 @@
+{% extends 'base.html'%}
+{% block content%}
+{%load static%}
+<style>
+   td{
+        text-align:center;
+    }
+</style>
+<table width="90%" cellpadding="15px" align="center" border="1">
+  <tr>
+    <th colspan="3"><h2>Member Details</h2></th>
+  </tr>
+  <tr>
+    <th>Member Id :</th>
+    <td>{{mem.member_id}}</td>
+  </tr>
+  <tr>
+    <th>Member Name :</th>
+    <td>{{mem.memname}}</td>
+  </tr>
+  <tr>
+    <th>Date of Birth :</th>
+    <td>{{mem.dob}}</td>
+  </tr>
+  <tr>
+    <th>Gender :</th>
+    <td>{{mem.gender}}</td>
+  </tr>
+  <tr>
+    <th>Member Type :</th>
+    <td>{{mem.memtype}}</td>
+  </tr>
+  <tr>
+    <th>Address:</th>
+    <td>{{mem.doorno}} - {{mem.strnme}} - {{mem.dist}} - {{mem.state}}</td>
+  </tr>
+  <tr>
+    <th>Pincode :</th>
+    <td>{{mem.pincode}}</td>
+  </tr>
+  {% if sto_iss %}
+  <tr>
+    <th colspan="3">Book Are Access by {{mem.memname}}</th>
+  </tr>
+  <tr>
+    <th>Book Title</th>
+    <th>Book ISBN</th>
+    <th>In Hand</th>
+  </tr>
+  {% for i in sto_iss %}
+  <tr>
+    <td><a href="http://127.0.0.1:8000/bookdt/{{i.book_id.acceno}}"><button>{{i.book_id.booktitle}}</button></a></td>
+    <td>{{i.book_id.isbn}}</td>
+    {% if i.actual_date%}
+    <td>No</td>
+    {%else%}
+    <td>Yes</td>
+    {% endif%}
+    {% endfor %}
+    {% endif %}
+  </tr>
+</table>
+<table width="90%" cellpadding="10px" align="center">
+    <tr>
+        <th><a href="http://127.0.0.1:8000/mem_list"><button>Back</button></a></th>
+    </tr>
+</table>
+{%endblock%}

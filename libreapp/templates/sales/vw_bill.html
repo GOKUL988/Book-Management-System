@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <title>BILL {{a.invcno}}</title>
+    </head>
+<style>
+ .td1{
+    text-align:left;
+}
+.th1{
+    text-align:right;
+}
+td{
+    text-align:center;
+}
+</style>
+<body>
+<table width="90%" cellpadding="10px" align="center" >
+    <tr>
+        <th colspan="6"><h3>SALES BILL</h3></th>
+    </tr>
+    <tr>
+        <th class="th1">BILL TO : </th>
+        <td colspan="2" class="td1">{{b.memname}} - ({{b.member_id}})</td>
+        <th  class="th1">INVOICE NO :</th>
+        <td class="td1">{{a.invcno}}</td>
+    </tr>
+    <tr>
+        <th  class="th1"> DATE : </th>
+        <td class="td1">{{a.dat}}</td>
+         <th colspan="2" class="th1">MEMBER TYPE :</th>
+        <td class="td1">{{b.memtype}}</td>
+    </tr>
+    <tr>
+        <th class="th1">ADDRESS :</th>
+        <td colspan="5" class="td1">{{b.doorno}}, {{b.strnme}}, {{b.dist}}, {{b.state}} - {{b.pincode}}</td>
+     </tr>
+    <tr>
+        <th></th>
+    </tr>
+</table>
+    <table width="90%" cellpadding="10px" align="center" border="1">
+        <tr>
+        <th colspan="6">PRODUCT LIST</th>
+    </tr>
+    <tr>
+        <th>S.NO</th>
+        <th>BOOK ISBN</th>
+        <th>BOOK TITLE</th>
+        <th>COST PER UNIT</th>
+        <th>QUANTITY</th>
+        <th>AMOUNT</th>
+    </tr>
+    {% for i in c%}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <th>{{i.bkisbn_dt }}</th>
+        <th>{{i.bktit_dt}}</th>
+        <td class="td2">{{i.perunt}}</td>
+        <td class="td2">{{i.qunt}}</td>
+        <td class="td2">{{i.amount}}</td>
+    </tr>
+    {% endfor%}
+    <tr>
+        <th colspan="5" align="right">TOTAL :</th>
+        <th>{{a.tot}}</th>
+    </tr>
+    </table>
+<table width="90%" cellpadding="10px" align="center">
+    <tr>
+        <th colspan="6">
+            <a href="http://127.0.0.1:8000/sale_list"><input type="button" value="BACK" id="back"> </a>
+            <input type="button" value="PRINT"  onclick="printInvoice()" id="remove">
+        </th>
+    </tr>
+</table>
+</body>
+<script>
+function printInvoice() {
+    document.getElementById('back').style.display = "none";
+    document.getElementById('remove').style.display = "none";
+
+    setTimeout(function () {
+        window.print();
+        document.getElementById('back').style.display = "inline";
+        document.getElementById('remove').style.display = "inline";
+    }, 300);
+}
+</script>
+
+</html>
+
+

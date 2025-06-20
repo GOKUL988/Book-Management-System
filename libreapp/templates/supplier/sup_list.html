@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% block content%}
+{% if messages %}
+{% endif%}
+<table align="center" cellpadding="10px" width="90%" border="1">
+    <tr>
+        <th colspan="5"><h2>Supplier List</h2></th>
+    </tr>
+    <tr align="right">
+        <form method="GET">
+                <th colspan="5"><input class="search" id="inp" type="text" name="search_supp" placeholder="Search by Name or ID">
+                <button type="submit" onclick="cl()">Search</button></th>
+        </form>
+    </tr>
+    <tr>
+        <th>Supplier ID</th>
+        <th>Supplier Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>details</th>
+    </tr>
+    {% for i in suplist%}
+    <tr>
+        <td>{{i.supp_id}}</td>
+        <td>{{i.sup_name}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.mobile}}</td>
+        <td><a href="http://127.0.0.1:8000/sup_dt/{{i.sup_id}}"><button>Check</button></a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

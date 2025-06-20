@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+     td{
+        text-align:center;
+    }
+</style>
+<table cellpadding="10px" width="90%" align="center" border="1">
+    <tr>
+        <th colspan="3 ">Sales Details</th>
+        <th><a href="http://127.0.0.1:8000/sale_nw"><input type="button" value="New Sale"></a> </th>
+    </tr>
+    <tr>
+        <th>Invoice No</th>
+        <th>Member ID</th>
+        <th>Invoice Date</th>
+        <th> View Bill</th>
+    </tr>
+    {% for i in inv_id%}
+    <td>{{i.invcno}}</td>
+    <td>{{i.mem_dt}}</td>
+    <td>{{i.dat}}</td>
+    <td><a href="http://127.0.0.1:8000/vw_bill/{{i.invcno}}"><input type="button" value="bill"></a></td>
+    {% endfor %}
+</table>
+{% endblock%}

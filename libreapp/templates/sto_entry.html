@@ -1,0 +1,152 @@
+{% extends 'base.html'%}
+{% block content%}
+{% load static %}
+<style>
+     td{
+        text-align:center;
+    }
+</style>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        <table cellpadding="10px" border="1" align="center" width="90%">
+            <tr>
+                <th colspan="2">Purchase</th>
+            </tr>
+             <tr>
+                 <input type="hidden" name="form_type" value="purchase">
+            </tr>
+           <tr>
+            <td><label for="">Supplier Id:</label></td>
+            <td>
+                <select name="supp_id" id="supp_id" required>
+                    <option value="">- - Select Supplier - -</option>
+                    {% for s in supp %}
+                        <option value="{{ s.sup_id }}">{{ s.supp_id }} - {{ s.sup_name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+               <td>
+                   <a href="http://127.0.0.1:8000/sup_entry"><button type="button">New Supplier</button></a>
+               </td>
+            </tr>
+             <tr>
+                <td><label for="">Bill No:</label></td>
+                <td><input type="text" name="billno" id="billno" required></td>
+            </tr>
+             <tr>
+                <td><label for="">Date</label></td>
+                <td><input type="date" name="date" id="date" required></td>
+            </tr>
+             <tr>
+                <td><label for="">Bill Upload:</label></td>
+                <td><input type="file" name="bill" id="bill" required></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td><input type="submit" name="" value="ok" onclick="pur_dt()"></td>
+             </tr>
+        </table>
+    </div>
+</form>
+
+<form method="POST">
+  {% csrf_token %}
+    <div align="center">
+        <table cellpadding="10px" width="90%" align="center" border="1">
+            <tr>
+                <th colspan="2">Stock</th>
+            </tr>
+            <tr>
+                <input type="hidden" name="form_type" value="stock">
+            </tr>
+            <tr>
+                <td><label for="">Purchase Id:</label></td>
+                <td><select name="purch_id" id="purch_id" required>
+                    <option value="">- - Select Purchase - -</option>
+                    {% for p in purr %}
+                        <option value="{{ p.purch_id }}">{{ p.purch_id }}-{{p.billno}}</option>
+                    {% endfor %}
+                </select>
+                </td>
+            </tr>
+             <tr>
+                <td><label for="">Book title:</label></td>
+                <td><input type="text" name="booktitle" id="booktitle" required></td>
+            </tr>
+             <tr>
+                <td><label for="">Author Name:</label></td>
+                <td><input type="text" name="authorname" id="authorname" required></td>
+            </tr>
+             <tr>
+                <td><label for="">Edition:</label></td>
+                <td><input type="text" name="edition" id="edition" required></td>
+            </tr>
+             <tr>
+                <td><label for="">Year:</label></td>
+                <td><input type="text" name="yearofpub" id="yearofpub" required></td>
+            </tr>
+            <tr>
+                <td><label for="">Classification:</label></td>
+                  <td><select name="classfic" id="classfic" style="width: 170px; " required>
+                <option value="">- - Select Classification - -</option>
+                <option value="programming">PROGRAMMING</option>
+                <option value="science fiction">SCI-FICTION</option>
+                <option value="Thriller">THRILLER</option>
+                <option value="Mystery">MYSTERY</option>
+                <option value="Romance">ROMANCE</option>
+                <option value="Biographie">BIOGRAPHIE</option>
+                <option value="Periodicals">PERIODICALS</option>
+                <option value="History">HISTORY</option>
+                <option value="Physics">PHYSICS</option>
+                <option value="Mathematics">MATHEMATICS</option>
+                <option value="Sociology">SOCIOLOGY</option>
+                <option value="Journals">JOURNALS</option>
+                <option value="Dictionaries">DICTIONARIES</option>
+                <option value="Graphic Novels">GRAPHIC NOVELS</option>
+            </select></td>
+            </tr>
+             <tr>
+                <td><label for="">Quantity</label></td>
+                <td><input type="text" name="qun" id="qun" required></td>
+            </tr>
+            <tr>
+                 <td><label for="">Avaibility</label></td>
+                <td><input type="text" name="ava" required></td>
+            </tr>
+             <tr>
+                <td><label for="">Rate:</label></td>
+                <td><input type="text" name="rate" id="rate" required></td>
+            </tr>
+             <tr>
+                <td><label for="">Rack:</label></td>
+                 <td><select name="rack" id="rack" style="width: 170px; " required>
+                    <option value="">- - Select Rack - -</option>
+                    <option value="Rack 1 - PERIODICALS">Rack 1 - PERIODICALS</option>
+                    <option value="Rack 2 - BIOGRAPHIE">Rack 2 - BIOGRAPHIE</option>
+                    <option value="Rack 3 - HISTORY">Rack 3 - HISTORY</option>
+                    <option value="Rack 4 - MYSTERY">Rack 4 - MYSTERY</option>
+                    <option value="Rack 5 - SOCIALOGY">Rack 5 - SOCIALOGY</option>
+                    <option value="Rack 6 - JOURNALS">Rack 6 - JOURNALS</option>
+                    <option value="Rack 7 - PHYSICS">Rack 7 - PHYSICS</option>
+                    <option value="Rack 8 - MATHEMATICS">Rack 8 - MATHEMATICS</option>
+                    <option value="Rack 9 - SCI FICTION">Rack 9 - SCI FICTION</option>
+                    <option value="Rack 10 - THRILLER">Rack 10 - THRILLER</option>
+                    <option value="Rack 11 - PROGRAMMING">Rack 11 - PROGRAMMING</option>
+                    <option value="Rack 12 - ROMANCE">Rack 12 - ROMANCE</option>
+                    <option value="Rack 13 - DICTIONARIES">Rack 13 - DICTIONARIES</option>
+                    <option value="Rack 14 - GRAPHIC NOVELS">Rack 14 - GRAPHIC NOVELS</option></select>
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" name="" value="sumbit"></td>
+            </tr>
+        </table>
+    </div>
+</form>
+<script>
+
+</script>
+{%endblock%}

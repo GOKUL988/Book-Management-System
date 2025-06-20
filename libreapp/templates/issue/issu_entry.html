@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% block content%}
+<style>
+     td{
+        text-align:center;
+    }
+</style>
+<form method="POST">
+    {% csrf_token %}
+    <table cellpadding="10px" width="90%" align="center" border="1">
+        <tr>
+            <th colspan="2"><h3>ISSUE ENTRY FORM</h3></th>
+        </tr>
+        <tr>
+            <th><label for="">Book Title:</label></th>
+            <td><select name="book_id" required>
+                <option value="">- - SELECT BOOK - -</option>
+            {% for i in sto%}
+                <option value="{{i.acceno}}">{{i.booktitle}} - {{i.isbn}}</option>
+            {% endfor%}
+            </select></td>
+        </tr>
+        <tr>
+            <th><label for="">Member ID:</label></th>
+            <td><select name="mem_id">
+                <option value="">- - SELECT MEMBER - -</option>
+            {% for j in mem%}
+                <option value="{{j.member_id}}">{{j.member_id}} - {{j.memname}}</option>
+            {% endfor%}
+            </select></td>
+        </tr>
+        <tr>
+            <th><label for="">Issue Date</label></th>
+            <td><input type="date" name="iss_date"></td>
+        </tr>
+        <tr>
+            <th><label for="">Check-in Date</label></th>
+            <td><input type="date" name="ret_date"></td>
+        </tr>
+        <tr>
+              <td colspan="2">
+                <input value="Submit" type="submit">
+            </td>
+        </tr>
+    </table>
+</form>
+<table cellpadding="10px" width="90%" align="center" border="1">
+    <tr><th colspan="2"><a href="http://127.0.0.1:8000/issu_lt" align="center"><button>back</button></a></th></tr>
+</table>
+
+
+{% endblock%}

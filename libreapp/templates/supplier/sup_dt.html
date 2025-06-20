@@ -1,0 +1,73 @@
+{% extends 'base.html'%}
+{% block content%}
+<style>
+    td{
+        text-align:center;
+    }
+</style>
+<table width="90%" cellpadding="10px" align="center">
+    <tr>
+        <th colspan="2"><h2> Supplier Details </h2></th>
+    </tr>
+    <tr>
+        <th>Supplier ID</th>
+        <td>{{supp.supp_id}}</td>
+    </tr>
+    <tr>
+        <th>Supplier Name</th>
+        <td>{{supp.sup_name}}</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>{{supp.email}}</td>
+    </tr>
+    <tr>
+        <th>Mobile</th>
+        <td>{{supp.mobile}}</td>
+    </tr>
+    <tr>
+        <th>Address</th>
+        <td>{{supp.doorno}} - {{supp.street}}</td>
+    </tr>
+    <tr>
+        <th>District</th>
+        <td>{{supp.dist}}</td>
+    </tr>
+    <tr>
+        <th>State</th>
+        <td>{{supp.stat}}</td>
+    </tr>
+    <tr>
+        <th>Pincode</th>
+        <td>{{supp.pin}}</td>
+    </tr>
+</table>
+<h2 align="center">Book Purchase from this Supplier</h2>
+{% if purdt%}
+<table width="90%" cellpadding="10px" align="center">
+    <tr>
+        <th>Book Title</th>
+        <th>ISBN No</th>
+        <th>Author Name</th>
+        <th>Edition</th>
+        <th>Year</th>
+    </tr>
+    {% for i in purdt%}
+    <tr>
+        <td><a href="http://127.0.0.1:8000/bookdt/{{i.acceno}}"><button>{{i.booktitle}}</button></a></td>
+        <td>{{i.isbn}}</td>
+        <td>{{i.authorname}}</td>
+        <td>{{i.edition}}</td>
+        <td>{{i.yearofpub}}</td>
+    </tr>
+    {%endfor%}
+</table>
+    {% else %}
+<h2> No Record founded from this supplier</h2>
+{%endif%}
+<table width="90%" cellpadding="10px" align="center">
+    <tr>
+        <th><a href="http://127.0.0.1:8000/sup_list"><button>Back</button></a></th>
+    </tr>
+</table>
+{% endblock %}

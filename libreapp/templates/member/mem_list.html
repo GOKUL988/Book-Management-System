@@ -1,0 +1,53 @@
+{% extends 'base.html'%}
+{% block content %}
+<style>
+    td{
+        text-align:center;
+    }
+
+</style>
+<table  width="90%" cellpadding="10px" align="center" border="1">
+    <tr>
+        <th colspan="8"><h2>Member list</h2></th>
+        <form method="GET">
+             <th colspan="8" align="right"><input id="inp" type="text" name="search_mem" placeholder="Search by Name or Member id">
+                 <button type="submit">Search</button></th>
+        </form>
+    </tr>
+</table>
+ {% if memlist%}
+<table width="90%" cellpadding="10px" align="center" border="1">
+    <tr>
+        <th>Member Id</th>
+        <th>Member Name</th>
+        <th>DOB</th>
+        <th>Gender</th>
+        <th>Mem-Type</th>
+        <th colspan="3">Options</th>
+    </tr>
+    {% for i in memlist%}
+    <tr>
+        <td>{{i.member_id}}</td>
+        <td>{{i.memname}}</td>
+        <td>{{i.dob}}</td>
+        <td>{{i.gender}}</td>
+        <td>{{i.memtype}}</td>
+        <td><a href="http://127.0.0.1:8000/memdt/{{i.member_id}}"><button>View</button></a></td>
+        <td><a href=""><button>Edit</button></a></td>
+        <td><a href=""><button>Delete</button></a></td>
+    </tr>
+    {% endfor%}
+    {% else%}
+        {%if non%}
+            <h3>No Search Record Founded</h3>
+        {% else%}
+            <h3>No Record are founded this page</h3>
+    {% endif%}
+    {% endif%}
+</table>
+<table width="90%" cellpadding="10px" align="center">
+    <tr>
+        <th><a href="http://127.0.0.1:8000"><button>Back</button></a></th>
+    </tr>
+</table>
+{% endblock %}

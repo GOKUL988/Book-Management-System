@@ -1,0 +1,148 @@
+{% extends 'base.html'%}
+{% block content%}
+<style>
+    td{
+        text-align:center;
+    }
+.pagesep{
+    display:flex;
+}
+.pagesep1{
+    flex:50%;
+}
+.pagesep2{
+    flex:50%;
+}
+
+</style>
+<table cellpadding="10px" width="90%"  align="center" border="1">
+    <tr>
+        <th colspan="2"><h2>Book Details</h2></th>
+    </tr>
+    <tr>
+        <th>ISBN No:</th>
+        <td>{{ a.isbn }}</td>
+    </tr>
+    <tr>
+        <th>Accession No:</th>
+        <td>{{ a.acceno }}</td>
+    </tr>
+    <tr>
+        <th>Title :</th>
+        <td>{{ a.booktitle }}</td>
+    </tr>
+    <tr>
+        <th>Author :</th>
+        <td>{{ a.authorname }}</td>
+    </tr>
+     <tr>
+        <th>Edition :</th>
+        <td>{{a.edition}}</td>
+    </tr>
+     <tr>
+        <th>Year of Publication :</th>
+        <td>{{ a.yearofpub }}</td>
+    </tr>
+     <tr>
+        <th>Classification : </th>
+        <td>{{ a.classfic }}</td>
+    </tr>
+     <tr>
+        <th>Availability:</th>
+        <td> {{ a.ava }}</td>
+    </tr>
+     <tr>
+        <th>Rate:</th>
+        <td>{{ a.rate }}</td>
+    </tr>
+    <tr>
+        <th>Quantity</th>
+        <td>{{ a.qun }}</td>
+    </tr>
+    <tr>
+        <th>Rack Details</th>
+        <td>{{ a.rack }}</td>
+    </tr>
+</table>
+
+<div class="pagesep">
+    <table class="pagesep1" border="1">
+        <tr>
+            <th colspan="2"><h2>Purchase Details</h2></th>
+        </tr>
+        <tr>
+            <th>Purchase ID :</th>
+            <td>{{b.purch_id}}</td>
+        </tr>
+        <tr>
+            <th>Bill No:</th>
+            <td>{{ b.billno }}</td>
+        </tr>
+        <tr>
+            <th>Purchase Date</th>
+            <td> {{ b.date }}</td>
+        </tr>
+        <tr>
+            <th>Bill: </th>
+            <td><a href="{{b.bill.url}}"><button>view</button></a></td>
+        </tr>
+    </table>
+    <table class="pagesep2" cellpadding="10px" border="1">
+        <tr>
+            <th colspan="2"><h2>Supplier Details</h2></th>
+        </tr>
+        <tr>
+            <th>Supplier Name : </th>
+            <td><a href="http://127.0.0.1:8000/sup_dt/{{c.sup_id}}"><button>{{ c.sup_name }}</button></a></td>
+        </tr>
+        <tr>
+            <th>Supplier ID :</th>
+            <td>{{c.supp_id}}</td>
+        </tr>
+        <tr>
+            <th>Email : </th>
+            <td>{{ c.email }}</td>
+        </tr>
+        <tr>
+            <th>Mobile : </th>
+            <td>{{ c.mobile }}</td>
+        </tr>
+        <tr>
+            <th>Address : </th>
+            <td>{{ c.doorno }}, {{ c.street }}, {{ c.dist }}, {{ c.stat }}</td>
+        </tr>
+        <tr>
+            <th>Pincode :</th>
+            <td>{{ c.pin }}</td>
+        </tr>
+    </table>
+</div>
+<div>
+    <h3 align="center">ISSUE DETAILS</h3>
+        {% if d%}
+<table width="90%" cellpadding="10px" align="center" border="1">
+        <tr>
+            <th>Member ID</th>
+            <th>Issue Date</th>
+            <th>Return Date</th>
+            <th>Status</th>
+        </tr>
+        {% for issue in d %}
+        <tr>
+            <td><a href="http://127.0.0.1:8000/memdt/{{issue.mem_id}}"><button>{{ issue.mem_id }}</button></a></td>
+            <td>{{ issue.iss_date }}</td>
+            <td>{{ issue.actual_date }}</td>
+            {% if issue.actual_date %}
+                <td>SUBMIT</td>
+            {% else%}
+                <td> NOT SUBMIT</td>
+            {% endif%}
+        </tr>
+        {% endfor %}
+</table>
+        {%else%}
+    <h4 align="center">No Issue record found this book</h4>
+    {%endif%}
+</div>
+
+{% endblock%}

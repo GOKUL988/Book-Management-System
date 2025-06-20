@@ -1,0 +1,59 @@
+{% extends 'base.html'%}
+{% block content%}
+<style>
+    td{
+        text-align:center;
+    }
+</style>
+<h2 align="center">Issued Books for {{ b.memname }}</h2>
+<table align="center" width="90%" cellpadding="10px" border="1">
+    {% for i in a%}
+    <tr>
+        <th>Member Name</th>
+        <td>{{i.mem_id.memname}}</td>
+         <th>Member Id</th>
+        <td>{{i.mem_id.member_id}}</td>
+    </tr>
+    <tr>
+        <th colspan="2">Member Type</th>
+        <td colspan="2">{{i.mem_id.memtype}}</td>
+    </tr>
+    {%endfor%}
+</table>
+<table align="center" width="90%" cellpadding="10px" border="1">
+    <tr>
+        <th>Title</th>
+        <th>ISBN</th>
+        <th>Issue Date</th>
+        <th>Check-in Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+        <th>Fine</th>
+        <th>Payment Method</th>
+    </tr>
+    {% for j in a %}
+    <tr>
+        <td>{{ j.book_id.booktitle }}</td>
+        <td>{{ j.book_id.isbn }}</td>
+        <td>{{ j.iss_date }}</td>
+        <td>{{ j.ret_date }}</td>
+        <td>{{ j.actual_date}}</td>
+        <td>
+            {% if j.actual_date %}
+                <a style="color:green">Returned</a>
+            {% else %}
+                <a style="color:red">Not Returned</a>
+            {% endif %}
+        </td>
+        <td style="color:maroon">{{ j.fine }}</td>
+            <td>{{j.paymth}}</td>
+    </tr>
+    {%endfor%}
+<tr>
+    <td colspan="7"><a href="http://127.0.0.1:8000/issu_lt"><button>Back</button></a></td>
+</tr>
+</table>
+
+
+
+{% endblock %}

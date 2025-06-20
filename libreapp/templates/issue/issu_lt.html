@@ -1,0 +1,67 @@
+{% extends 'base.html'%}
+{% block content%}
+<style>
+    td{
+        text-align:center;
+    }
+</style>
+<table cellpadding="10px" border="1" width="90%" align="center">
+    <tr>
+        <th align="start"><h2>ISSUE LIST</h2></th>
+        <th align="end" colspan="6"><a href="http://127.0.0.1:8000/issu_entry"><button>New Issue</button></a>
+    </tr>
+    <tr>
+        <form method="GET">
+             <th colspan="8" align="right"><input type="text" list="bklst" name="search_issu" placeholder="Search by Name or Member id">
+                 <button type="submit">Search</button></th>
+        </form>
+    </tr>
+</table>
+<table cellpadding="10px" border="1" width="90%" align="center">
+    {% if isslist %}
+     <tr>
+        <th>Member Id</th>
+         <th>Member Name</th>
+        <th>Book Title</th>
+        <th>Issue Date</th>
+        <th>Check-in date</th>
+         <th>Status</th>
+        <th colspan="2">Option</th>
+    </tr>
+    {% for i in isslist%}
+    <tr>
+       <td>{{i.mem_id.member_id}}</td>
+        <td>{{i.mem_id.memname}}</td>
+        <td>{{i.book_id.booktitle}}</td>
+        <td>{{i.iss_date}}</td>
+        <td>{{i.ret_date}}</td>
+        {% if i.actual_date%}
+            <td style="color:green;">SUMBIT</td>
+        {% else %}
+            <td style="color:red;">NOT SUMBIT</td>
+        {% endif%}
+        <td><a href="http://127.0.0.1:8000/issu_dt/{{i.issu_id}}"><button>Details</button></a></td>
+        {% if i.actual_date%}
+            <td> <a href="http://127.0.0.1:8000/issu_ret/{{i.issu_id}}"><button id="retbut()" disabled>Returned book</button></a></td>
+        {%else%}
+        <td> <a href="http://127.0.0.1:8000/issu_ret/{{i.issu_id}}"><button id="retbut()">Returned book</button></a></td>
+        {%endif%}
+    </tr>
+     {% endfor%}
+</table>
+{% else%}
+<h3>No Issue record Found, new to Issue</h3>
+{% endif%}
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+                <li class="{{ message.tags }}">{{message}}</li>
+            {% endfor %}
+    </ul>
+{% endif %}
+<script>
+    function retbut(){
+        windows.alert('Already this book Returned !!')
+    }
+</script>
+{% endblock%}

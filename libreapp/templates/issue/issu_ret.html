@@ -1,0 +1,71 @@
+{% extends 'base.html'%}
+{% block content%}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table width="90%" cellpadding="10px" align="center" border="1">
+        <input type="hidden" name="form_type" value="actualdate">
+        <tr>
+            <th colspan="5">Book Return Entry</th>
+        </tr>
+         {% for a in iss_obj1%}
+    <tr>
+        <th>Member Name</th>
+        <td>{{a.mem_id.memname}}</td>
+         <th>Member Id</th>
+        <td>{{a.mem_id.member_id}}</td>
+    </tr>
+    <tr>
+        <th colspan="2">Member Type</th>
+        <td colspan="2">{{a.mem_id.memtype}}</td>
+    </tr>
+    {%endfor%}
+        <tr>
+            <th>Book Title</th>
+            <th>ISBN</th>
+            <th>Issue Date</th>
+            <th>Check-In Date</th>
+            <th><label for="">Return Date</label></th>
+        </tr>
+        {% for i in iss_obj1%}
+        <tr>
+            <th>{{ i.book_id.booktitle }}</th>
+            <th>{{ i.book_id.isbn }}</th>
+            <th>{{ i.iss_date }}</th>
+            <th>{{ i.ret_date }}</th>
+            <td><input type="date" name="actual_date" required></td>
+        </tr>
+        {% endfor%}
+        <tr>
+            <th colspan="5">
+                <input type="submit" id="submitBtn" value="OK">
+            </th>
+        </tr>
+    </table>
+    {% if iss_obj.fine %}
+    <table width="90%" cellpadding="10px" align="center" border="1" id="fin">
+        <input type="hidden" name="form_type" value="billing">
+        <tr>
+            <th colspan="2">Billing</th>
+        </tr>
+
+        <tr>
+            <th>Fine :</th>
+            <td>{{ iss_obj.fine }}</td>
+        </tr>
+        <tr>
+            <th>Payment Method :</th>
+            <td><select name="paymth">
+                <option value="">- - Select Payment - -</option>
+                <option value="CASH">CASH</option>
+                <option value="ONLINE TRANSCATION">ONLINE TRANSCATION</option>
+                <option value="DEBIT CARD">DEBIT CARD</option>
+                <option value="CREDIT CARD">CREDIT CARD</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Pay"></td>
+        </tr>
+        {% endif %}
+    </table>
+</form>
+{% endblock%}
