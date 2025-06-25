@@ -19,7 +19,7 @@ A simple web-based Book Management System that allows users to manage books, tra
 - **Backend:** Django 
 - **Frontend:** HTML, CSS, JavaScript
 - **Database:** SQLite
-- **Others:**Git and Version Control,vercel
+- **Others**:Git and Version Control,vercel
 
 ## 🚀 Installation & Setup
 Follow these steps to run the project locally:
